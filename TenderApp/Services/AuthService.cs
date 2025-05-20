@@ -1,0 +1,35 @@
+﻿using TenderApp.Data;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using System.Windows;
+using TenderApp.Models;
+
+namespace TenderApp.Services
+{
+    public interface IAuthService
+    {
+        User? CurrentUser { get; }
+        bool IsLoginValid(string login, string password);
+    }
+
+    public class AuthService(TenderDbContext db) : IAuthService
+    {
+        private readonly TenderDbContext _db = db;
+
+        public User? CurrentUser { get; private set; }
+
+        public bool IsLoginValid(string login, string password)
+        {
+            CurrentUser = _db.Users?.FirstOrDefault(u =>
+                u.Login == login && u.Password == password);
+            return CurrentUser != null;
+        }
+    }
+}
+
+
