@@ -174,3 +174,5 @@
 </Window>
 
 <!--KeyboardNavigation.DirectionalNavigation="Continue"-->
+<!--CommandParameter=
+                        "{Binding RelativeSource={RelativeSource AncestorType=Window}}"-->                    

@@ -1,5 +1,8 @@
-﻿using TenderApp.Models;
+﻿using System.Windows;
+
+using TenderApp.Models;
 using TenderApp.Services;
+using TenderApp.Views;
 
 namespace TenderApp.ViewModels
 {
@@ -16,8 +19,8 @@ namespace TenderApp.ViewModels
             return new UserItemViewModel((UserService)service);
         }
 
-        protected override bool? ShowItemDialog(ItemViewModel<User> itemViewModel)
-            => new UserItemWindow((UserItemViewModel)itemViewModel).ShowDialog();
+        protected override Window CreateItemDialog(ItemViewModel<User> itemViewModel)
+            => new UserItemWindow(itemViewModel);
     }
 }
 

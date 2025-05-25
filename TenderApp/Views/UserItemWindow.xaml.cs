@@ -1,13 +1,13 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
 
-namespace TenderApp.ViewModels
+using TenderApp.Models;
+using TenderApp.ViewModels;
+
+namespace TenderApp.Views
 {
     public partial class UserItemWindow : Window
     {
-        public UserItemWindow(UserItemViewModel viewModel)
+        public UserItemWindow(ItemViewModel<User> viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
@@ -16,22 +16,7 @@ namespace TenderApp.ViewModels
         private void FirstField_Loaded(object sender, 
             RoutedEventArgs e)
         {
-            FirstField.Focus();
-            FirstField.SelectAll();
-        }
-
-        private void ExecuteButton_Click(object sender,
-            RoutedEventArgs e)
-        {
-            // Принудительное обновление binding'а у текущего элемента
-            var element = FocusManager.GetFocusedElement(this) 
-                as FrameworkElement;
-            if(element != null)
-            {
-                var binding = BindingOperations.GetBindingExpression
-                    (element, TextBox.TextProperty);
-                binding?.UpdateSource();
-            }
+            ItemWindowHelper.FocusFirstField(sender);
         }
     }
 }

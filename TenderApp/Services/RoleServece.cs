@@ -1,16 +1,6 @@
 ﻿using TenderApp.Data;
 using TenderApp.Models;
 
-using Microsoft.EntityFrameworkCore;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using TenderApp.Services;
-
 namespace TenderApp.Services
 {
     public class RoleService(TenderDbContext db) : DbService<Role>(db)

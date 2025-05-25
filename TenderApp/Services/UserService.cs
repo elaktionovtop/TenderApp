@@ -3,14 +3,6 @@ using TenderApp.Models;
 
 using Microsoft.EntityFrameworkCore;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using TenderApp.Services;
-
 namespace TenderApp.Services
 {
     public class UserService(TenderDbContext db) : DbService<User>(db)
@@ -55,7 +47,7 @@ namespace TenderApp.Services
 
             if(string.IsNullOrWhiteSpace(item.Password))
                 throw new ArgumentException
-                    ("Пароль пользователя не указано");
+                    ("Пароль пользователя не указан");
 
             if(item.Role is null)
                 throw new ArgumentException("Роль пользователя не указана");

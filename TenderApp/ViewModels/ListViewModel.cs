@@ -1,21 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-using TenderApp.Models;
-using TenderApp.Services;
-
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows;
-using TenderApp.Views;
-using System.Windows.Data;
-using System.Windows.Threading;
 using System.Diagnostics;
+using System.Windows;
+using System.Windows.Data;
+
+using TenderApp.Services;
+using TenderApp.Views;
 
 namespace TenderApp.ViewModels
 {
@@ -98,7 +90,7 @@ namespace TenderApp.ViewModels
         [RelayCommand]
         protected virtual void DeleteItem()
         {
-            Debug.WriteLine(nameof(EditItem));
+            Debug.WriteLine(nameof(DeleteItem));
 
             if(SelectedItem is null)
             {
@@ -131,12 +123,23 @@ namespace TenderApp.ViewModels
             }
         }
 
+        protected bool? ShowItemDialog(ItemViewModel<T> itemViewModel)
+        {
+            var dialog = CreateItemDialog(itemViewModel);
+            // текущее окно, которое открывает диалог
+            dialog.Owner = Application.Current.Windows
+                .OfType<Window>()
+                .FirstOrDefault(w => w.IsActive);
+            return dialog.ShowDialog();
+        }
+
         protected abstract ItemViewModel<T> CreateItemViewModel
             (IDbService<T> service, T item);
 
         protected abstract ItemViewModel<T> CreateItemViewModel
             (IDbService<T> service);
 
-        protected abstract bool? ShowItemDialog(ItemViewModel<T> itemViewModel);
+        protected abstract Window CreateItemDialog(ItemViewModel<T> itemViewModel);
+
     }
 }

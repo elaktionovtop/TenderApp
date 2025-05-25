@@ -5,12 +5,15 @@ using TenderApp.Services;
 using TenderApp.Views;
 
 using System.Diagnostics;
+using System.Windows;
 
 namespace TenderApp.ViewModels
 {
-    public partial class TenderListViewModel(IDbService<Tender> service) 
+    public partial class TenderListViewModel
+        (IDbService<Tender> service) 
         : ListViewModel<Tender>(service)
     {
+
         //  команды Организатора (Category Manager)
         //  ---------------------------------------
         //  добавить тендер (окно заявок тендера)
@@ -77,7 +80,7 @@ namespace TenderApp.ViewModels
             return new TenderItemViewModel((TenderService)service);
         }
 
-        protected override bool? ShowItemDialog(ItemViewModel<Tender> itemViewModel)
-            => new TenderItemWindow((TenderItemViewModel)itemViewModel).ShowDialog();
+        protected override Window CreateItemDialog(ItemViewModel<Tender> itemViewModel)
+            => new TenderItemWindow(itemViewModel);
     }
 }

@@ -3,10 +3,6 @@ using TenderApp.Views;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-
-using System;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 using TenderApp.Data;
@@ -43,6 +39,7 @@ namespace TenderApp
             services.AddTransient<UserService>();
             services.AddTransient<UserListViewModel>();
             services.AddTransient<UserListWindow>();
+            services.AddTransient<UserItemViewModel>();
 
             services.AddTransient<RoleService>();
 
@@ -52,10 +49,10 @@ namespace TenderApp
             DbVerification.Perform();
 
             // Для отладки коммнтируем авторизацию
-            Services.GetRequiredService<LoginWindow>().ShowDialog();
+            //Services.GetRequiredService<LoginWindow>().ShowDialog();
 
             // и загружаем главное окно
-            //App.Services.GetRequiredService<TenderListWindow>().Show();
+            App.Services.GetRequiredService<TenderListWindow>().Show();
         }
     }
 }

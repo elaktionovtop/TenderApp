@@ -2,6 +2,7 @@
     x:Class="TenderApp.Views.TenderItemWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:TenderApp.Views"
     
     Height="450" 
     Title="Тендер" 
@@ -26,81 +27,49 @@
             Grid.Row="0" 
             Grid.Column="0" 
             Text="Продукт:"                  
-            Margin="5"
-            VerticalAlignment="Center" 
             />
         <TextBox x:Name="FirstField"
             Grid.Row="0" 
             Grid.Column="1" 
-            Margin="5"
             Text="{Binding Item.Product}"
             Loaded="FirstField_Loaded"
             />
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="0" 
-            Margin="5"
             Text="Бюджет:"
-            VerticalAlignment="Center" 
             />
         <TextBox 
             Grid.Row="1" 
             Grid.Column="1" 
-            Margin="5"
             Text="{Binding Item.Budget}" 
             />
         <TextBlock 
             Grid.Row="2" 
             Grid.Column="0" 
-            Margin="5"
             Text="Количество:"                    
-            VerticalAlignment="Center" 
             />
         <TextBox 
             Grid.Row="2" 
             Grid.Column="1" 
-            Margin="5"
             Text="{Binding Item.Quantity}" 
             />
         <TextBlock 
             Grid.Row="3" 
             Grid.Column="0" 
-            Margin="5"
             Text="Организатор:"
-            VerticalAlignment="Center" 
             />
         <ComboBox 
             Grid.Row="3" 
             Grid.Column="1"                   
-            Margin="5"
 
             ItemsSource="{Binding Users}"
             SelectedItem="{Binding Item.CreatedBy}"
             DisplayMemberPath="Name" 
             />
-        <StackPanel 
+        <view:ItemWindowButtonPanel
             Grid.Row="4" 
-            Grid.ColumnSpan="2" 
-            HorizontalAlignment="Right" 
-            Margin="0,20,0,0"
-            Orientation="Horizontal"
-            >
-            <Button 
-                Click="ExecuteButton_Click"
-                Command="{Binding ApplyCommand}"
-                CommandParameter=
-                    "{Binding RelativeSource={RelativeSource AncestorType=Window}}"
-                Content="Сохранить" 
-                IsDefault="True"
-                Margin="5"
-                Width="100" 
-                />
-            <Button 
-                Content="Отмена" 
-                IsCancel="True"
-                Margin="5"
-                Width="100" 
-                />
-        </StackPanel>
+            Grid.Column="1"                   
+            />
     </Grid>
 </Window>
