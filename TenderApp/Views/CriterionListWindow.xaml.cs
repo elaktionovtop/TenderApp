@@ -9,13 +9,13 @@ using TenderApp.ViewModels;
 
 namespace TenderApp.Views
 {
-    public partial class UserListWindow : Window
+    public partial class CriterionListWindow : Window
     {
-        public UserListWindow()
+        public CriterionListWindow()
         {
             InitializeComponent();
             var viewModel = App.Services
-                .GetRequiredService<UserListViewModel>();
+                .GetRequiredService<CriterionListViewModel>();
             DataContext = viewModel;
 
             Loaded += (s, e)
@@ -28,10 +28,10 @@ namespace TenderApp.Views
                 => ListWindowHelper.FocusSelectedRow(dataGrid);
 
             dataGrid.MouseDoubleClick += (s, e) => ListWindowHelper
-                .MouseDoubleClick<User>(dataGrid, viewModel, e);
+                .MouseDoubleClick<Criterion>(dataGrid, viewModel, e);
 
             dataGrid.PreviewKeyDown += (s, e) => ListWindowHelper
-                .PreviewKeyDown<User>(dataGrid, viewModel, e);
+                .PreviewKeyDown<Criterion>(dataGrid, viewModel, e);
         }
     }
 }

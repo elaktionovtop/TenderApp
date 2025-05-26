@@ -11,7 +11,8 @@ using TenderApp.Views;
 
 namespace TenderApp.ViewModels
 {
-    public abstract partial class ListViewModel<T> : ObservableObject 
+    public abstract partial class ListViewModel<T> 
+        : ObservableObject 
         where T : class, new()
     {
         readonly IDbService<T> _service;

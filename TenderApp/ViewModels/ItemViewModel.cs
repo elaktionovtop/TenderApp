@@ -9,7 +9,7 @@ namespace TenderApp.ViewModels
     public partial class ItemViewModel<T> : ObservableObject 
         where T : class, new()
     {
-        readonly protected DbService<T> _service ;
+        protected DbService<T> _service ;
 
         private T? Original { get; set; }
 

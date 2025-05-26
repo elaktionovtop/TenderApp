@@ -1,4 +1,5 @@
-﻿<Window x:Class="TenderApp.Views.UserItemWindow"
+﻿<Window 
+    x:Class="TenderApp.Views.UserItemWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:TenderApp.ViewModels"
@@ -31,8 +32,8 @@
         <TextBox
             Grid.Row="0" 
             Grid.Column="1" 
-            Loaded="FirstField_Loaded"
             Text="{Binding Item.Name}"
+            Loaded="FirstField_Loaded"
             />
         <TextBlock 
             Grid.Row="1" 

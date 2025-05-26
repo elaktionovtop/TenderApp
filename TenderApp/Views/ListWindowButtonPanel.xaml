@@ -1,0 +1,29 @@
+﻿<UserControl 
+    x:Class="TenderApp.Views.ListWindowButtonPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    <StackPanel 
+        HorizontalAlignment="Left" 
+        Margin="0,10,0,0"
+        Orientation="Horizontal" 
+        >
+        <Button 
+            Command="{Binding CreateItemCommand}"
+            Content="Добавить" 
+            />
+        <Button 
+            Command="{Binding EditItemCommand}"
+            Content="Изменить" 
+            />
+        <Button 
+            Command="{Binding DeleteItemCommand}"
+            Content="Удалить" 
+            />
+        <Button 
+            Click="OnExitClick" 
+            Content="Выход" 
+            Margin="20,0,0,0"
+            />
+    </StackPanel>
+</UserControl>

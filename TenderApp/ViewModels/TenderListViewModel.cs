@@ -46,6 +46,7 @@ namespace TenderApp.ViewModels
         private void Criteria()
         {
             Debug.WriteLine(nameof(Criteria));
+            new CriterionListWindow().ShowDialog();
         }
 
         //  ---------------------------------------

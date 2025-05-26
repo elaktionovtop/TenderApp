@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TenderApp.Services
 {
-    public class UserService(TenderDbContext db) : DbService<User>(db)
+    public class UserService(TenderDbContext db) 
+        : DbService<User>(db)
     {
         public override IEnumerable<User> GetAll()
             => _db.Users.Include(it => it.Role);

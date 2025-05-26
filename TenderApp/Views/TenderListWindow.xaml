@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:TenderApp.ViewModels"
+    xmlns:view="clr-namespace:TenderApp.Views"
         
     Height="450" 
     Title="Тендеры" 
@@ -10,53 +11,37 @@
     WindowStartupLocation="CenterScreen"
     >
     <Window.InputBindings>
-        <KeyBinding 
-            Key="N"
-            Modifiers="Control"
-            Command="{Binding CreateItemCommand}"
-            />
         <KeyBinding
-            Key="R"
-            Modifiers="Control"
-            Command="{Binding TenderCriteriaCommand}"
-            />
-        <KeyBinding
-            Key="S"
-            Modifiers="Control"
-            Command="{Binding CriteriaCommand}"
-            />
-        <KeyBinding
-            Key="P"
-            Modifiers="Control"
-            Command="{Binding BuyerTendersCommand}"
-            />
-        <KeyBinding
+            Command="{Binding UsersCommand}"
             Key="G"
             Modifiers="Control"
-            Command="{Binding UsersCommand}"
+            />
+        <KeyBinding 
+            Command="{Binding CreateItemCommand}"
+            Key="N"
+            Modifiers="Control"
+            />
+        <KeyBinding
+            Command="{Binding TenderCriteriaCommand}"
+            Key="R"
+            Modifiers="Control"
+            />
+        <KeyBinding
+            Command="{Binding CriteriaCommand}"
+            Key="S"
+            Modifiers="Control"
+            />
+        <KeyBinding
+            Command="{Binding BuyerTendersCommand}"
+            Key="P"
+            Modifiers="Control"
             />
     </Window.InputBindings>
 
-    <StackPanel>
+    <StackPanel 
+        Margin="10, 0">
         <Menu
             KeyboardNavigation.DirectionalNavigation="None">
-            <MenuItem Header="Тендеры">
-                <MenuItem 
-                    Command="{Binding CreateItemCommand}"
-                    Header="Добавить"
-                    InputGestureText="Ctrl+N"
-                    />
-                <MenuItem 
-                    Command="{Binding EditItemCommand}"
-                    Header="Редактировать"
-                    InputGestureText="Enter" 
-                    />
-                <MenuItem
-                    Command="{Binding DeleteItemCommand}"
-                    Header="Удалить"
-                    InputGestureText="Del" 
-                    />
-            </MenuItem>
             <MenuItem
                 Header="Критерии">
                 <MenuItem
@@ -77,102 +62,66 @@
                 Header="Список тендеров участника Ctrl+P"
                 InputGestureText="Ctrl+P"
                 />
-            
             <MenuItem
                 Command="{Binding UsersCommand}"
                 Header="Список пользоателей Ctrl+G"
                 InputGestureText="Ctrl+G"
                 />
         </Menu>
-
+        
+        <view:ListWindowButtonPanel/>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel
-                Grid.Column="0"
-                Grid.Row="0"
-                Margin="10"
+            <DataGrid x:Name="dataGrid" 
+                Height="200"
+                ItemsSource="{Binding Items}"
+                SelectedItem=
+                      "{Binding SelectedItem, Mode=TwoWay}"
                 >
-                <TextBlock
-                    FontWeight="Bold"
-                    Margin="5"
-                    Text="Тендеры"
-                    />
-                <DataGrid x:Name="dataGrid" 
-                    AutoGenerateColumns="False"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="False"
-                    Height="200"
-                    IsReadOnly="True"
-                    IsTabStop="True"
-                    ItemsSource="{Binding Items}"
-                    SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                    SelectionUnit="FullRow"
-                    SelectionMode="Extended"
-                          
-                    MouseDoubleClick="DataGrid_MouseDoubleClick"
-                    PreviewKeyDown="DataGrid_PreviewKeyDown"
-                    SelectionChanged="DataGrid_SelectionChanged"
-                    >
-                    <DataGrid.ColumnHeaderStyle>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter 
-                                Property="HorizontalContentAlignment"
-                                Value="Center"
-                                />
-                            <Setter 
-                                Property="FontWeight" 
-                                Value="Bold"
-                                />
-                        </Style>
-                    </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Binding="{Binding Product}"
+                        Header="Продукт"
+                        />
+                    <DataGridTextColumn 
+                        Binding="{Binding Budget}"
+                        Header="Бюджет"
+                        >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter 
+                                    Property="HorizontalAlignment"
+                                    Value="Right"
+                                    />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                    <DataGrid.Columns>
-                        <DataGridTextColumn 
-                            Binding="{Binding Product}"
-                            Header="Продукт"
-                            />
-                        <DataGridTextColumn 
-                            Binding="{Binding Budget}"
-                            Header="Бюджет"
-                            >
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter 
-                                        Property="HorizontalAlignment"
-                                        Value="Right"
-                                        />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
+                    <DataGridTextColumn 
+                        Binding="{Binding Quantity}"
+                        Header="Количество"
+                        >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter 
+                                    Property="HorizontalAlignment" 
+                                    Value="Right"
+                                    />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                        <DataGridTextColumn 
-                            Binding="{Binding Quantity}"
-                            Header="Количество"
-                            >
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter 
-                                        Property="HorizontalAlignment" 
-                                        Value="Right"
-                                        />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-
-                        <DataGridTextColumn 
-                            Binding="{Binding CreatedBy.Name}"
-                            Header="Category Manager"
-                            />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
+                    <DataGridTextColumn 
+                        Binding="{Binding CreatedBy.Name}"
+                        Header="Category Manager"
+                        />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </StackPanel>
 </Window>
 
-<!--KeyboardNavigation.DirectionalNavigation="Continue"-->
-<!--CommandParameter=
-                        "{Binding RelativeSource={RelativeSource AncestorType=Window}}"-->                    

@@ -7,7 +7,7 @@ namespace TenderApp.ViewModels
 {
     public partial class UserItemViewModel : ItemViewModel<User>
     {
-        private RoleService _service =
+        private readonly RoleService _roleService =
             App.Services.GetRequiredService<RoleService>();
 
         public ObservableCollection<Role> Roles { get; }
@@ -15,14 +15,14 @@ namespace TenderApp.ViewModels
         public UserItemViewModel(UserService service) 
             : base(service)
         {
-            Roles = _service
+            Roles = _roleService
                 .GetAll().ToObservableCollection();
         }
 
         public UserItemViewModel(UserService service, User item)
             : base(service, item)
         {
-            Roles = _service
+            Roles = _roleService
                 .GetAll().ToObservableCollection();
         }
 

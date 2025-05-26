@@ -96,12 +96,12 @@ namespace TenderApp.Data
                 (
                     new Criterion 
                     { 
-                        Name = "Срок поставки", 
+                        Name = "Срок поставки",
                         Type = CriterionType.Numeric 
                     },
                     new Criterion 
                     { 
-                        Name = "Опыт поставщика", 
+                        Name = "Опыт поставщика",
                         Type = CriterionType.Text 
                     }
                 );
