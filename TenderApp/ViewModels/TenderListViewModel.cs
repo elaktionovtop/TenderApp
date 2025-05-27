@@ -39,6 +39,7 @@ namespace TenderApp.ViewModels
         private void TenderCriteria()
         {
             Debug.WriteLine(nameof(TenderCriteria));
+            new TenderCriterionListWindow().ShowDialog();
         }
 
         //  окно критериев (CRUD)

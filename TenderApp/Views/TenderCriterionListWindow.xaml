@@ -1,0 +1,58 @@
+﻿<Window 
+    x:Class="TenderApp.Views.TenderCriterionListWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:TenderApp.ViewModels"
+    xmlns:view="clr-namespace:TenderApp.Views"
+
+    Height="450" 
+    Title="Критерии тендера" 
+    Width="800"
+    WindowStartupLocation="CenterScreen"
+    >
+    <Window.InputBindings>
+        <KeyBinding 
+            Command="{Binding CreateItemCommand}"
+            Key="N"
+            Modifiers="Control"
+            />
+    </Window.InputBindings>
+
+    <StackPanel 
+        Margin="10, 0">
+        <view:ListWindowButtonPanel/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="dataGrid"
+                Height="200"
+                ItemsSource="{Binding Items}"
+                SelectedItem=
+                      "{Binding SelectedItem, Mode=TwoWay}"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Binding="{Binding Tender.Name}"
+                        Header="Тендер"
+                        />
+                    <DataGridTextColumn 
+                        Binding="{Binding Criterion.Name}"
+                        Header="Критерий"
+                        />
+                    <DataGridTextColumn 
+                        Binding="{Binding Weight}"
+                        Header="Вес"
+                        />
+                    <DataGridCheckBoxColumn 
+                        Binding="{Binding IsRequired}" 
+                        Header="Обязателен" 
+                        IsThreeState="False"
+                        />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </StackPanel>
+</Window>

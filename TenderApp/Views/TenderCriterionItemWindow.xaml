@@ -1,0 +1,67 @@
+﻿<Window 
+    x:Class="TenderApp.Views.TenderCriterionItemWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:TenderApp.ViewModels"
+    xmlns:view="clr-namespace:TenderApp.Views"
+
+    Height="450" 
+    Title="Критерий тендаера" 
+    Width="600"
+    WindowStartupLocation="CenterOwner"
+    >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock 
+            Grid.Row="0" 
+            Grid.Column="0" 
+            Text="Критерий тендера:"                  
+            />
+        <ComboBox 
+            Grid.Row="0" 
+            Grid.Column="1"                   
+            Margin="0,5,5,5"
+            Loaded="FirstField_Loaded"
+
+            ItemsSource="{Binding Criteria}"
+            SelectedItem="{Binding Item.Criterion}"
+            DisplayMemberPath="Name" 
+            />
+        <TextBlock 
+            Grid.Row="1" 
+            Grid.Column="0" 
+            Text="Вес:"
+            />
+        <TextBox 
+            Grid.Row="1" 
+            Grid.Column="1"                 
+            Text="{Binding Item.Weight}" 
+            />
+        <TextBlock 
+            Grid.Row="2" 
+            Grid.Column="0" 
+            Text="Обязателен:"                    
+            />
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="1"
+            IsChecked="{Binding Item.IsRequired}"
+            VerticalAlignment="Center"
+            />
+        <view:ItemWindowButtonPanel
+            Grid.Row="3" 
+            Grid.Column="1"                   
+            />
+    </Grid></Window>

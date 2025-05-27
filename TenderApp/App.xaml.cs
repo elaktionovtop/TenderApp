@@ -36,10 +36,16 @@ namespace TenderApp
             services.AddTransient<TenderListWindow>();
 
             services.AddTransient<IDbService<Criterion>, CriterionService>();
+            services.AddTransient<CriterionService>();
             services.AddTransient<CriterionListViewModel>();
             services.AddTransient<CriterionListWindow>();
 
             services.AddTransient<RoleService>();
+
+            services.AddTransient<IDbService<TenderCriterion>, 
+                TenderCriterionService>();
+            services.AddTransient<TenderCriterionListViewModel>();
+            services.AddTransient<TenderCriterionListWindow>();
 
             services.AddTransient<IDbService<User>, UserService>(); 
             services.AddTransient<UserService>();
