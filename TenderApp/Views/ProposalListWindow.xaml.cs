@@ -11,12 +11,13 @@ namespace TenderApp.Views
 {
     public partial class ProposalListWindow : Window
     {
-        public ProposalListWindow(int tenderId)
+        public ProposalListWindow(int tenderId, int buyerId = 0)
         {
             InitializeComponent();
             var viewModel = App.Services
                 .GetRequiredService<ProposalListViewModel>();
             viewModel.TenderId = tenderId;
+            viewModel.BuyerId = buyerId;
             viewModel.GetData();
             DataContext = viewModel;
 

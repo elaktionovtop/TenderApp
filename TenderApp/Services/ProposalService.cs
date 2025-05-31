@@ -18,6 +18,20 @@ namespace TenderApp.Services
                     .ThenInclude(tc => tc.Criterion))
             ;
 
+        //public IEnumerable<Proposal> GetByTenderIdByerId(int tenderId, int byerId)
+        //    => (_db.Proposals
+        //    .Where(p => p.TenderId == tenderId && p.ByerId = byerId)
+        //    .Include(p => p.Tender)
+        //    .Include(p => p.Byer)
+        //    .Include(p => p.Values)
+        //        .ThenInclude(v => v.TenderCriterion)
+        //            .ThenInclude(tc => tc.Criterion))
+        //    ;
+
+        public IEnumerable<Proposal> GetByTenderIdBuyerId(int tenderId, int byerId)
+            => GetByTenderId(tenderId).Where(p => p.ByerId == byerId);
+
+
         public override Proposal Clone(Proposal source)
         {
             return new()

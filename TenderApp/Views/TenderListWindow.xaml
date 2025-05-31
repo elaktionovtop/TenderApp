@@ -32,7 +32,7 @@
             Modifiers="Control"
             />
         <KeyBinding
-            Command="{Binding BuyerTendersCommand}"
+            Command="{Binding BuyerTendersProposalCommand}"
             Key="E"
             Modifiers="Control"
             />
@@ -66,8 +66,8 @@
                 InputGestureText="Ctrl+S"
                 />
             <MenuItem
-                Command="{Binding BuyerTendersCommand}"
-                Header="Список тендеров участника"
+                Command="{Binding BuyerTenderProposalCommand}"
+                Header="Список заявок участника"
                 InputGestureText="Ctrl+E"
                 />
             <MenuItem

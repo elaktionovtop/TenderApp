@@ -1,11 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 
-using TenderApp.Models;
-using TenderApp.Services;
-using TenderApp.Views;
+using Microsoft.Extensions.DependencyInjection;
 
 using System.Diagnostics;
 using System.Windows;
+
+using TenderApp.Models;
+using TenderApp.Services;
+using TenderApp.Views;
 
 namespace TenderApp.ViewModels
 {
@@ -59,11 +61,16 @@ namespace TenderApp.ViewModels
         //  ---------------------------------------
         //  команды Участника (Buyer)
         //  ---------------------------------------
-        //  окно тендеров участника(редактирование, удаление)
+        //  окно заявок участника тендера(CRUD)
         [RelayCommand]
-        private void BuyerTenders()
+        private void BuyerTenderProposal()
         {
-            Debug.WriteLine(nameof(BuyerTenders));
+            Debug.WriteLine(nameof(BuyerTenderProposal));
+            int buyerId = App.Services
+                    .GetRequiredService<IAuthService>()
+                    .CurrentUser.Id; 
+            new ProposalListWindow(SelectedItem.Id, buyerId)
+                .ShowDialog();
         }
 
         //  ---------------------------------------

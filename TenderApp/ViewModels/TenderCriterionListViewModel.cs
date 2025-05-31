@@ -1,10 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-using Microsoft.Extensions.DependencyInjection;
-
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 
 using TenderApp.Models;
 using TenderApp.Services;
@@ -33,7 +27,8 @@ namespace TenderApp.ViewModels
 
         protected override ItemViewModel<TenderCriterion> CreateItemViewModel
             (IDbService<TenderCriterion> service)
-            => new TenderCriterionItemViewModel((TenderCriterionService)service,
+            => new TenderCriterionItemViewModel(
+                (TenderCriterionService)service,
                 TenderId);
 
         protected override Window CreateItemDialog

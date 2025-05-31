@@ -32,7 +32,8 @@
         <ComboBox 
             Grid.Row="0" 
             Grid.Column="1"                   
-
+            IsEnabled="{Binding BuyerMustBeSelected}"
+            
             ItemsSource="{Binding Users}"
             SelectedItem="{Binding Item.Byer}"
             DisplayMemberPath="Name" 

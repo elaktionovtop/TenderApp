@@ -28,6 +28,7 @@ namespace TenderApp
                 optionsLifetime: ServiceLifetime.Singleton);
 
             services.AddSingleton<IAuthService, AuthService>();
+            //services.AddSingleton<AuthService>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<LoginWindow>();
 
@@ -67,10 +68,10 @@ namespace TenderApp
             DbVerification.Perform();
 
             // Для отладки коммнтируем авторизацию
-            //Services.GetRequiredService<LoginWindow>().ShowDialog();
+            Services.GetRequiredService<LoginWindow>().ShowDialog();
 
             // и загружаем главное окно
-            App.Services.GetRequiredService<TenderListWindow>().Show();
+            //App.Services.GetRequiredService<TenderListWindow>().Show();
         }
     }
 }
