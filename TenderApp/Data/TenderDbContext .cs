@@ -17,66 +17,76 @@ namespace TenderApp.Data
         public DbSet<TenderCriterion> TenderCriteria 
             => Set<TenderCriterion>();
         public DbSet<Proposal> Proposals => Set<Proposal>();
-        public DbSet<ProposalValue> ProposalValues 
-            => Set<ProposalValue>();
+        public DbSet<CriterionValue> CriterionValues
+            => Set<CriterionValue>();
         public DbSet<Contract> Contracts => Set<Contract>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // User -> Role
+            // User → Role (многие пользователи — одна роль)
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Role)
                 .WithMany()
                 .HasForeignKey(u => u.RoleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Tender -> CreatedBy
+            // Tender → CreatedBy (один пользователь — много тендеров)
             modelBuilder.Entity<Tender>()
                 .HasOne(t => t.CreatedBy)
                 .WithMany()
                 .HasForeignKey(t => t.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // TenderCriterion -> Tender + Criterion
+            // TenderCriterion → Tender
             modelBuilder.Entity<TenderCriterion>()
                 .HasOne(tc => tc.Tender)
                 .WithMany(t => t.Criteria)
-                .HasForeignKey(tc => tc.TenderId);
+                .HasForeignKey(tc => tc.TenderId)
+                .OnDelete(DeleteBehavior.Cascade); // удаление тендера удаляет критерии
 
+            // TenderCriterion → Criterion
             modelBuilder.Entity<TenderCriterion>()
                 .HasOne(tc => tc.Criterion)
                 .WithMany()
-                .HasForeignKey(tc => tc.CriterionId);
+                .HasForeignKey(tc => tc.CriterionId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Proposal -> Tender + Byer
+            // Proposal → Tender
             modelBuilder.Entity<Proposal>()
                 .HasOne(p => p.Tender)
                 .WithMany(t => t.Proposals)
-                .HasForeignKey(p => p.TenderId);
+                .HasForeignKey(p => p.TenderId)
+                .OnDelete(DeleteBehavior.NoAction); // ← чтобы разорвать цикл
 
+            // Proposal → Byer (User)
             modelBuilder.Entity<Proposal>()
                 .HasOne(p => p.Byer)
                 .WithMany()
                 .HasForeignKey(p => p.ByerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // ProposalValue -> Proposal + Criterion
-            modelBuilder.Entity<ProposalValue>()
-                .HasOne(pv => pv.Proposal)
+            // CriterionValue → Proposal
+            modelBuilder.Entity<CriterionValue>()
+                .HasOne(cv => cv.Proposal)
                 .WithMany(p => p.Values)
-                .HasForeignKey(pv => pv.ProposalId);
+                .HasForeignKey(cv => cv.ProposalId)
+                .OnDelete(DeleteBehavior.Cascade); // удаление заявки удаляет значения
 
-            modelBuilder.Entity<ProposalValue>()
-                .HasOne(pv => pv.Criterion)
+            // CriterionValue → TenderCriterion
+            modelBuilder.Entity<CriterionValue>()
+                .HasOne(cv => cv.TenderCriterion)
                 .WithMany()
-                .HasForeignKey(pv => pv.CriterionId);
+                .HasForeignKey(cv => cv.TenderCriterionId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // Contract -> Tender + Winner
+            // Contract → Tender
             modelBuilder.Entity<Contract>()
                 .HasOne(c => c.Tender)
                 .WithMany()
-                .HasForeignKey(c => c.TenderId);
+                .HasForeignKey(c => c.TenderId)
+                .OnDelete(DeleteBehavior.Cascade); // тендер удаляется — контракт тоже
 
+            // Contract → Winner (User)
             modelBuilder.Entity<Contract>()
                 .HasOne(c => c.Winner)
                 .WithMany()

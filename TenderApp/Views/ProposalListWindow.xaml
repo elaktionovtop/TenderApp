@@ -1,12 +1,12 @@
 ﻿<Window 
-    x:Class="TenderApp.Views.TenderCriterionListWindow"
+    x:Class="TenderApp.Views.ProposalListWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:TenderApp.ViewModels"
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Критерии тендера" 
+    Title="Заявки тендера" 
     Width="800"
     WindowStartupLocation="CenterScreen"
     >
@@ -32,6 +32,8 @@
                 ItemsSource="{Binding Items}"
                 SelectedItem=
                       "{Binding SelectedItem, Mode=TwoWay}"
+                
+                Loaded="DataGrid_Loaded"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
@@ -39,16 +41,16 @@
                         Header="Тендер"
                         />
                     <DataGridTextColumn 
-                        Binding="{Binding Criterion.Name}"
-                        Header="Критерий"
+                        Binding="{Binding Byer.Name}"
+                        Header="Участник"
                         />
                     <DataGridTextColumn 
-                        Binding="{Binding Weight}"
-                        Header="Вес"
+                        Binding="{Binding Comment}"
+                        Header="Комментарий"
                         />
                     <DataGridCheckBoxColumn 
-                        Binding="{Binding IsRequired}" 
-                        Header="Обязателен" 
+                        Binding="{Binding IsWinner}" 
+                        Header="Победитель" 
                         IsThreeState="False"
                         />
                 </DataGrid.Columns>

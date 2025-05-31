@@ -18,6 +18,15 @@ namespace TenderApp.ViewModels
     {
         public int TenderId { get; set; }
 
+        public override void GetData()
+        {
+            Items = ((TenderCriterionService)_service)
+                .GetByTenderId(TenderId)
+                .ToObservableCollection();
+
+            SelectedItem = Items.FirstOrDefault();
+        }
+
         protected override ItemViewModel<TenderCriterion> CreateItemViewModel
             (IDbService<TenderCriterion> service, TenderCriterion item)
             => new TenderCriterionItemViewModel((TenderCriterionService)service, item);

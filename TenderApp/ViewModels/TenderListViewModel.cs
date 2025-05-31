@@ -16,7 +16,7 @@ namespace TenderApp.ViewModels
 
         //  команды Организатора (Category Manager)
         //  ---------------------------------------
-        //  добавить тендер (окно заявок тендера)
+        //  добавить тендер (окно заголовка тендера)
         //  [RelayCommand]
         //  protected virtual void CreateItem() 
 
@@ -24,22 +24,28 @@ namespace TenderApp.ViewModels
         //  [RelayCommand]
         //  protected virtual void DeleteItem() 
 
-        //  окно заявок тендера (CRUD, другие команды)
+        //  окно заголоовка тендера
         //  [RelayCommand]
-        //  protected virtual void EditItem()   
-        protected override void EditItem()
-        {
-            Debug.WriteLine(nameof(EditItem));
+        //  protected virtual void EditItem()  
 
-            base.EditItem();
-        }
+        //  ---------------------------------------
 
         // окно критериев тендера (CRUD)
         [RelayCommand]
         private void TenderCriteria()
         {
             Debug.WriteLine(nameof(TenderCriteria));
-            new TenderCriterionListWindow().ShowDialog();
+            new TenderCriterionListWindow(SelectedItem.Id)
+                .ShowDialog();
+        }
+
+        // окно заявок тендера (CRUD)
+        [RelayCommand]
+        private void TenderProposal()
+        {
+            Debug.WriteLine(nameof(TenderProposal));
+            new ProposalListWindow(SelectedItem.Id)
+                .ShowDialog();
         }
 
         //  окно критериев (CRUD)

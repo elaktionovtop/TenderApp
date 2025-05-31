@@ -191,35 +191,35 @@ namespace TenderApp.Data
 
         static void VerifyProposalValues()
         {
-            if(!_db.ProposalValues.Any())
+            if(!_db.CriterionValues.Any())
             {
                 var proposals = _db.Proposals.ToList();
                 var crits = _db.Criteria.ToList();
 
-                _db.ProposalValues.AddRange
+                _db.CriterionValues.AddRange
                 (
-                    new ProposalValue 
+                    new CriterionValue
                     { 
                         ProposalId = proposals[0].Id, 
-                        CriterionId = crits[0].Id, 
+                        TenderCriterionId = crits[0].Id, 
                         Value = "10" 
                     },
-                    new ProposalValue 
+                    new CriterionValue
                     { 
-                        ProposalId = proposals[0].Id, 
-                        CriterionId = crits[1].Id, 
+                        ProposalId = proposals[0].Id,
+                        TenderCriterionId = crits[1].Id, 
                         Value = "5 лет" 
                     },
-                    new ProposalValue 
+                    new CriterionValue
                     { 
-                        ProposalId = proposals[1].Id, 
-                        CriterionId = crits[0].Id, 
+                        ProposalId = proposals[1].Id,
+                        TenderCriterionId = crits[0].Id, 
                         Value = "8" 
                     },
-                    new ProposalValue 
+                    new CriterionValue
                     { 
-                        ProposalId = proposals[1].Id, 
-                        CriterionId = crits[1].Id, 
+                        ProposalId = proposals[1].Id,
+                        TenderCriterionId = crits[1].Id, 
                         Value = "3 года" 
                     }
                 );

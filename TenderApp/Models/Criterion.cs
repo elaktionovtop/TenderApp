@@ -15,18 +15,15 @@ namespace TenderApp.Models
 
         [NotMapped]
         public static ObservableCollection<EnumDisplay<CriterionType>>
-            CriteriaTypes { get; } = new()
-            {
+            CriteriaTypes { get; } =
+            [
                 new(CriterionType.Numeric, "Числовой"),
                 new(CriterionType.Text, "Текстовый")
-            };
+            ];
 
         [NotMapped]
-        EnumDisplay<CriterionType> SelectedCriterionType;
-
-        [NotMapped]
-        public string CriterionTypeText => CriteriaTypes
-            .FirstOrDefault(s => s.Value == Type).Display;
+        public string? CriterionTypeText => CriteriaTypes
+            .FirstOrDefault(s => s.Value == Type)?.Display;
     }
 
     public enum CriterionType

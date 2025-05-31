@@ -16,11 +16,11 @@ namespace TenderApp.ViewModels
         public ObservableCollection<Criterion> Criteria { get; }
 
         public TenderCriterionItemViewModel(TenderCriterionService service,
-            int TenderId) : base(service)
+            int tenderId) : base(service)
         {
             Criteria = _criterionService
                 .GetAll().ToObservableCollection();
-            Item.TenderId = TenderId;
+            Item.TenderId = tenderId;
         }
 
         public TenderCriterionItemViewModel(TenderCriterionService service,

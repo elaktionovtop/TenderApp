@@ -11,6 +11,5 @@
 
         public Tender Tender { get; set; } = null!;
         public Criterion Criterion { get; set; } = null!;
-
     }
 }

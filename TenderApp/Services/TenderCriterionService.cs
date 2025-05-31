@@ -10,10 +10,11 @@ namespace TenderApp.Services
     public class TenderCriterionService(TenderDbContext db) 
         : DbService<TenderCriterion>(db)
     {
-        public override IEnumerable<TenderCriterion> GetAll()
-            => _db.TenderCriteria
+        public IEnumerable<TenderCriterion> GetByTenderId(int tenderId)
+            => (db.TenderCriteria
+            .Where(tc => tc.TenderId == tenderId)
                 .Include(it => it.Tender)
-                .Include(it => it.Criterion)
+                .Include(it => it.Criterion))
         ;
 
         public override TenderCriterion Clone(TenderCriterion source)

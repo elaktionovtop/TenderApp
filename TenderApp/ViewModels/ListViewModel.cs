@@ -15,7 +15,7 @@ namespace TenderApp.ViewModels
         : ObservableObject 
         where T : class, new()
     {
-        readonly IDbService<T> _service;
+        protected readonly IDbService<T> _service;
 
         [ObservableProperty]
         protected ObservableCollection<T> _items;
@@ -28,6 +28,16 @@ namespace TenderApp.ViewModels
             Debug.WriteLine(nameof(ListViewModel<T>));
 
             _service = service;
+            //GetData();
+            //Items = _service.GetAll().ToObservableCollection();
+            //if(Items.Count > 0)
+            //{
+            //    SelectedItem = Items[0];
+            //}
+        }
+
+        public virtual void GetData()
+        {
             Items = _service.GetAll().ToObservableCollection();
             if(Items.Count > 0)
             {

@@ -5,7 +5,7 @@
 namespace TenderApp.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Changes_0529 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,7 @@ namespace TenderApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -44,6 +45,8 @@ namespace TenderApp.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -124,8 +127,7 @@ namespace TenderApp.Migrations
                         name: "FK_Proposals_Tenders_TenderId",
                         column: x => x.TenderId,
                         principalTable: "Tenders",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Proposals_Users_ByerId",
                         column: x => x.ByerId,
@@ -140,10 +142,10 @@ namespace TenderApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenderId = table.Column<int>(type: "int", nullable: false),
-                    CriterionId = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<double>(type: "float", nullable: false),
-                    IsRequired = table.Column<bool>(type: "bit", nullable: false)
+                    IsRequired = table.Column<bool>(type: "bit", nullable: false),
+                    TenderId = table.Column<int>(type: "int", nullable: false),
+                    CriterionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,7 +155,7 @@ namespace TenderApp.Migrations
                         column: x => x.CriterionId,
                         principalTable: "Criteria",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TenderCriteria_Tenders_TenderId",
                         column: x => x.TenderId,
@@ -163,31 +165,31 @@ namespace TenderApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProposalValues",
+                name: "CriterionValues",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProposalId = table.Column<int>(type: "int", nullable: false),
-                    CriterionId = table.Column<int>(type: "int", nullable: false),
+                    TenderCriterionId = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Score = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProposalValues", x => x.Id);
+                    table.PrimaryKey("PK_CriterionValues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProposalValues_Criteria_CriterionId",
-                        column: x => x.CriterionId,
-                        principalTable: "Criteria",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProposalValues_Proposals_ProposalId",
+                        name: "FK_CriterionValues_Proposals_ProposalId",
                         column: x => x.ProposalId,
                         principalTable: "Proposals",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CriterionValues_TenderCriteria_TenderCriterionId",
+                        column: x => x.TenderCriterionId,
+                        principalTable: "TenderCriteria",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -201,6 +203,16 @@ namespace TenderApp.Migrations
                 column: "WinnerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CriterionValues_ProposalId",
+                table: "CriterionValues",
+                column: "ProposalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CriterionValues_TenderCriterionId",
+                table: "CriterionValues",
+                column: "TenderCriterionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Proposals_ByerId",
                 table: "Proposals",
                 column: "ByerId");
@@ -209,16 +221,6 @@ namespace TenderApp.Migrations
                 name: "IX_Proposals_TenderId",
                 table: "Proposals",
                 column: "TenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProposalValues_CriterionId",
-                table: "ProposalValues",
-                column: "CriterionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProposalValues_ProposalId",
-                table: "ProposalValues",
-                column: "ProposalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TenderCriteria_CriterionId",
@@ -248,13 +250,13 @@ namespace TenderApp.Migrations
                 name: "Contracts");
 
             migrationBuilder.DropTable(
-                name: "ProposalValues");
-
-            migrationBuilder.DropTable(
-                name: "TenderCriteria");
+                name: "CriterionValues");
 
             migrationBuilder.DropTable(
                 name: "Proposals");
+
+            migrationBuilder.DropTable(
+                name: "TenderCriteria");
 
             migrationBuilder.DropTable(
                 name: "Criteria");

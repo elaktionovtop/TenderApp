@@ -11,12 +11,13 @@ namespace TenderApp.Views
 {
     public partial class TenderCriterionListWindow : Window
     {
-        public TenderCriterionListWindow()
+        public TenderCriterionListWindow(int tenderId)
         {
             InitializeComponent();
             var viewModel = App.Services
                 .GetRequiredService<TenderCriterionListViewModel>();
-            viewModel.TenderId = viewModel.SelectedItem.TenderId;
+            viewModel.TenderId = tenderId;
+            viewModel.GetData();
             DataContext = viewModel;
 
             Loaded += (s, e)

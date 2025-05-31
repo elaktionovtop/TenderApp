@@ -16,10 +16,11 @@ namespace TenderApp.Views
             InitializeComponent();
             var viewModel = App.Services
                 .GetRequiredService<UserListViewModel>();
+            viewModel.GetData();
             DataContext = viewModel;
 
-            Loaded += (s, e)
-                => ListWindowHelper.MoveFocus(dataGrid);
+            //Loaded += (s, e)
+            //    => ListWindowHelper.MoveFocus(dataGrid);
 
             viewModel.Items.CollectionChanged += (s, e)
                 => ListWindowHelper.FocusSelectedRow(dataGrid);

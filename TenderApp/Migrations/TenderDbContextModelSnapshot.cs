@@ -68,6 +68,36 @@ namespace TenderApp.Migrations
                     b.ToTable("Criteria");
                 });
 
+            modelBuilder.Entity("TenderApp.Models.CriterionValue", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProposalId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TenderCriterionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProposalId");
+
+                    b.HasIndex("TenderCriterionId");
+
+                    b.ToTable("CriterionValues");
+                });
+
             modelBuilder.Entity("TenderApp.Models.Proposal", b =>
                 {
                     b.Property<int>("Id")
@@ -95,36 +125,6 @@ namespace TenderApp.Migrations
                     b.HasIndex("TenderId");
 
                     b.ToTable("Proposals");
-                });
-
-            modelBuilder.Entity("TenderApp.Models.ProposalValue", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CriterionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProposalId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CriterionId");
-
-                    b.HasIndex("ProposalId");
-
-                    b.ToTable("ProposalValues");
                 });
 
             modelBuilder.Entity("TenderApp.Models.Role", b =>
@@ -253,6 +253,25 @@ namespace TenderApp.Migrations
                     b.Navigation("Winner");
                 });
 
+            modelBuilder.Entity("TenderApp.Models.CriterionValue", b =>
+                {
+                    b.HasOne("TenderApp.Models.Proposal", "Proposal")
+                        .WithMany("Values")
+                        .HasForeignKey("ProposalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TenderApp.Models.TenderCriterion", "TenderCriterion")
+                        .WithMany()
+                        .HasForeignKey("TenderCriterionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Proposal");
+
+                    b.Navigation("TenderCriterion");
+                });
+
             modelBuilder.Entity("TenderApp.Models.Proposal", b =>
                 {
                     b.HasOne("TenderApp.Models.User", "Byer")
@@ -264,31 +283,12 @@ namespace TenderApp.Migrations
                     b.HasOne("TenderApp.Models.Tender", "Tender")
                         .WithMany("Proposals")
                         .HasForeignKey("TenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Byer");
 
                     b.Navigation("Tender");
-                });
-
-            modelBuilder.Entity("TenderApp.Models.ProposalValue", b =>
-                {
-                    b.HasOne("TenderApp.Models.Criterion", "Criterion")
-                        .WithMany()
-                        .HasForeignKey("CriterionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TenderApp.Models.Proposal", "Proposal")
-                        .WithMany("Values")
-                        .HasForeignKey("ProposalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Criterion");
-
-                    b.Navigation("Proposal");
                 });
 
             modelBuilder.Entity("TenderApp.Models.Tender", b =>
@@ -307,7 +307,7 @@ namespace TenderApp.Migrations
                     b.HasOne("TenderApp.Models.Criterion", "Criterion")
                         .WithMany()
                         .HasForeignKey("CriterionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("TenderApp.Models.Tender", "Tender")

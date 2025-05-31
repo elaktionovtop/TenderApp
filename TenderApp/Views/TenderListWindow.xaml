@@ -11,11 +11,6 @@
     WindowStartupLocation="CenterScreen"
     >
     <Window.InputBindings>
-        <KeyBinding
-            Command="{Binding UsersCommand}"
-            Key="G"
-            Modifiers="Control"
-            />
         <KeyBinding 
             Command="{Binding CreateItemCommand}"
             Key="N"
@@ -27,40 +22,53 @@
             Modifiers="Control"
             />
         <KeyBinding
+            Command="{Binding TenderProposalCommand}"
+            Key="P"
+            Modifiers="Control"
+            />
+        <KeyBinding
             Command="{Binding CriteriaCommand}"
             Key="S"
             Modifiers="Control"
             />
         <KeyBinding
             Command="{Binding BuyerTendersCommand}"
-            Key="P"
+            Key="E"
+            Modifiers="Control"
+            />
+        <KeyBinding
+            Command="{Binding UsersCommand}"
+            Key="G"
             Modifiers="Control"
             />
     </Window.InputBindings>
 
     <StackPanel 
         Margin="10, 0">
-        <Menu
-            KeyboardNavigation.DirectionalNavigation="None">
+        <Menu>
             <MenuItem
-                Header="Критерии">
+                Header="Тендер">
                 <MenuItem
                     Command="{Binding TenderCriteriaCommand}"
-                    Header="Критерии тендера"
+                    Header="Критерии"
                     InputGestureText="Ctrl+R"
                     />
-                <Separator/>
                 <MenuItem
-                    Command="{Binding CriteriaCommand}"
-                    Header="Список критериев"
-                    InputGestureText="Ctrl+S"
+                    Command="{Binding TenderProposalCommand}"
+                    Header="Заявки"
+                    InputGestureText="Ctrl+P"
                     />
             </MenuItem>
 
             <MenuItem
+                Command="{Binding CriteriaCommand}"
+                Header="Список критериев"
+                InputGestureText="Ctrl+S"
+                />
+            <MenuItem
                 Command="{Binding BuyerTendersCommand}"
-                Header="Список тендеров участника Ctrl+P"
-                InputGestureText="Ctrl+P"
+                Header="Список тендеров участника"
+                InputGestureText="Ctrl+E"
                 />
             <MenuItem
                 Command="{Binding UsersCommand}"
@@ -125,3 +133,4 @@
     </StackPanel>
 </Window>
 
+<!--KeyboardNavigation.DirectionalNavigation="None">-->

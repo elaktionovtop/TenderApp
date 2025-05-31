@@ -16,6 +16,7 @@ namespace TenderApp.Views
             InitializeComponent();
             var viewModel = App.Services
                 .GetRequiredService<CriterionListViewModel>();
+            viewModel.GetData();
             DataContext = viewModel;
 
             Loaded += (s, e)
