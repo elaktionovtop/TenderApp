@@ -10,19 +10,22 @@
         >
         <Button 
             Command="{Binding CreateItemCommand}"
-            Content="Добавить" 
+            Content="Add" 
+            Visibility="{Binding ManagerVisibility}"
             />
         <Button 
             Command="{Binding EditItemCommand}"
-            Content="Изменить" 
+            Content="Edit" 
+            Visibility="{Binding ManagerVisibility}"
             />
         <Button 
             Command="{Binding DeleteItemCommand}"
-            Content="Удалить" 
+            Content="Remove" 
+            Visibility="{Binding ManagerVisibility}"
             />
         <Button 
             Click="OnExitClick" 
-            Content="Выход" 
+            Content="Exit" 
             Margin="20,0,0,0"
             />
     </StackPanel>

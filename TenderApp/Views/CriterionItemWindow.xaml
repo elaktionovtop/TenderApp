@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Критерий" 
+    Title="Criterion" 
     Width="600"
     WindowStartupLocation="CenterOwner"
     >
@@ -27,7 +27,7 @@
         <TextBlock 
             Grid.Row="0" 
             Grid.Column="0" 
-            Text="Название:"
+            Text="Name:"
             />
         <TextBox
             Grid.Row="0" 
@@ -38,7 +38,7 @@
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="0" 
-            Text="Тип:"
+            Text="Type:"
             />
         <ComboBox 
             Grid.Row="1" 

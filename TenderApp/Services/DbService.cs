@@ -75,7 +75,7 @@ namespace TenderApp.Services
 
         public abstract void Validate(T entity);
 
-        protected virtual string GetDeleteErrorMessage(T entity) => "Ошибка при удалении";
+        protected virtual string GetDeleteErrorMessage(T entity) => "Error when deleting";
             //=> $"Невозможно удалить объект типа {typeof(T).Name}" +
             //   $" — он связан с другими данными.";
     }

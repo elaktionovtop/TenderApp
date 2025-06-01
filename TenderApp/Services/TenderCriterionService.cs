@@ -51,11 +51,11 @@ namespace TenderApp.Services
         {
             if(item.Weight < 1 || item.Weight > 100)
                 throw new ArgumentException
-                    ("Вес должен быть в пределах 1 - 100");
+                    ("Weight must be in the range 1 - 100");
         }
 
         protected override string GetDeleteErrorMessage(TenderCriterion item)
-            => "Невозможно удалить критерий тендера: "
-            + "он содержит связанные заявки.";
+            => "Unable to delete tender criterion: "
+            + "it contains related proposals.";
     }
 }

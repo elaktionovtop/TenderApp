@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
         
     Height="450" 
-    Title="Тендеры" 
+    Title="Tenders" 
     Width="800"
     WindowStartupLocation="CenterScreen"
     >
@@ -47,35 +47,35 @@
         Margin="10, 0">
         <Menu>
             <MenuItem
-                Header="Тендер"
+                Header="Tender"
                 Visibility="{Binding ManagerVisibility}">
                 <MenuItem
                     Command="{Binding TenderCriteriaCommand}"
-                    Header="Критерии"
+                    Header="Criteria"
                     InputGestureText="Ctrl+R"
                     />
                 <MenuItem
                     Command="{Binding TenderProposalCommand}"
-                    Header="Заявки"
+                    Header="Proposals"
                     InputGestureText="Ctrl+P"
                     />
             </MenuItem>
 
             <MenuItem
                 Command="{Binding CriteriaCommand}"
-                Header="Список критериев"
+                Header="Criteria List"
                 InputGestureText="Ctrl+S"
                 Visibility="{Binding ManagerVisibility}"
                 />
             <MenuItem
                 Command="{Binding BuyerTenderProposalCommand}"
-                Header="Список заявок участника"
+                Header="Participant's Proposals List"
                 InputGestureText="Ctrl+E"
                 Visibility="{Binding BuyerVisibility}"
                 />
             <MenuItem
                 Command="{Binding UsersCommand}"
-                Header="Список пользоателей Ctrl+G"
+                Header="Users List"
                 InputGestureText="Ctrl+G"
                 Visibility="{Binding AdminVisibility}"
                 />
@@ -91,17 +91,16 @@
             <DataGrid x:Name="dataGrid" 
                 Height="200"
                 ItemsSource="{Binding Items}"
-                SelectedItem=
-                      "{Binding SelectedItem, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Binding="{Binding Product}"
-                        Header="Продукт"
+                        Header="Product"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Budget}"
-                        Header="Бюджет"
+                        Header="Budget"
                         >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -115,7 +114,7 @@
 
                     <DataGridTextColumn 
                         Binding="{Binding Quantity}"
-                        Header="Количество"
+                        Header="Quantity"
                         >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
@@ -136,5 +135,3 @@
         </Grid>
     </StackPanel>
 </Window>
-
-<!--KeyboardNavigation.DirectionalNavigation="None">-->

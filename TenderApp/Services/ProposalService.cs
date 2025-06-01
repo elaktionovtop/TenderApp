@@ -75,21 +75,21 @@ namespace TenderApp.Services
         public override void Validate(Proposal item)
         {
             if(item.Tender is null)
-                throw new ArgumentException("Тендер заявки не указан");
+                throw new ArgumentException("Proposal tender is not specified");
 
             if(item.Byer is null)
-                throw new ArgumentException("Участник заявки не указан");
+                throw new ArgumentException("Proposal participant is not specified");
 
             foreach (var proposal in item.Values)
             {
                 if(proposal.Value is null)
-                    throw new ArgumentException("Значения заявки не указаны");
+                    throw new ArgumentException("Proposal values are not specified");
             }
         }
 
         //protected override string GetDeleteErrorMessage
         //    (Proposal item)
-        //    => "Невозможно удалить заявку: "
-        //    + "есть данные связанные с ней.";
+        //    => "Unable to delete proposal: "
+        //    + "there is data associated with it.";
     }
 }

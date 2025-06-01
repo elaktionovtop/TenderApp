@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Заявки тендера" 
+    Title="Tender Proposals" 
     Width="800"
     WindowStartupLocation="CenterScreen"
     >
@@ -23,12 +23,12 @@
         <Menu>
             <MenuItem
                 Command="{Binding CalculateWinnerCommand}"
-                Header="Определить победителя Ctrl+G"
+                Header="Determine Winner"
                 InputGestureText="Ctrl+G"
                 />
             <MenuItem
                 Command="{Binding CreateContractCommand}"
-                Header="Сформироввать контракт Ctrl+R"
+                Header="Create Contract"
                 InputGestureText="Ctrl+R"
                 />
         </Menu>
@@ -43,27 +43,25 @@
             <DataGrid x:Name="dataGrid"
                 Height="200"
                 ItemsSource="{Binding Items}"
-                SelectedItem=
-                      "{Binding SelectedItem, Mode=TwoWay}"
-                
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 Loaded="DataGrid_Loaded"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Binding="{Binding Tender.Product}"
-                        Header="Тендер"
+                        Header="Tender"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Byer.Name}"
-                        Header="Участник"
+                        Header="Participant"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Comment}"
-                        Header="Комментарий"
+                        Header="Comment"
                         />
                     <DataGridCheckBoxColumn 
                         Binding="{Binding IsWinner}" 
-                        Header="Победитель" 
+                        Header="Winner" 
                         IsThreeState="False"
                         />
                 </DataGrid.Columns>

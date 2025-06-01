@@ -6,7 +6,7 @@
 
     Height="300" 
     ResizeMode="NoResize"
-    Title="Авторизация" 
+    Title="Authorization" 
     Width="300"
     WindowStartupLocation="CenterScreen"
     WindowStyle ="ToolWindow"
@@ -15,7 +15,7 @@
                 VerticalAlignment="Center"
                 >
         <TextBlock Margin="0,0,0,5"
-                   Text="Логин"
+                   Text="Login"
                    Width="200"
                    />
         <TextBox x:Name="FirstBox"
@@ -26,7 +26,7 @@
                  />
         <TextBlock Margin="0,0,0,5"
                    Width="200"
-                   Text="Пароль" 
+                   Text="Password" 
                    />
         <PasswordBox x:Name="PasswordBox"
                      Margin="0,0,0,10"
@@ -36,7 +36,7 @@
                     Margin="0,0,0,10"
                     Width="200"
                     >
-            <TextBlock Text="Число попыток: "/>
+            <TextBlock Text="Attempts: "/>
             <TextBlock Text="{Binding AttemptsCount}"/>
         </StackPanel>
 
@@ -46,12 +46,12 @@
             <Button Command="{Binding ApplyCommand}" 
                     CommandParameter=
                         "{Binding ElementName=PasswordBox}"
-                    Content="Дальше" 
+                    Content="Ok" 
                     IsDefault="True"
                     Margin="5"
                     Width="80" 
                     />
-            <Button Content="Отмена" 
+            <Button Content="Cancel" 
                     HorizontalAlignment="Right"
                     IsCancel="True"
                     Margin="5"

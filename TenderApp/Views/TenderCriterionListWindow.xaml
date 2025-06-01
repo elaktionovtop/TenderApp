@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Критерии тендера" 
+    Title="Tender Criteria" 
     Width="800"
     WindowStartupLocation="CenterScreen"
     >
@@ -30,25 +30,24 @@
             <DataGrid x:Name="dataGrid"
                 Height="200"
                 ItemsSource="{Binding Items}"
-                SelectedItem=
-                      "{Binding SelectedItem, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Binding="{Binding Tender.Product}"
-                        Header="Тендер"
+                        Header="Tender"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Criterion.Name}"
-                        Header="Критерий"
+                        Header="Criterion"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Weight}"
-                        Header="Вес"
+                        Header="Weight"
                         />
                     <DataGridCheckBoxColumn 
                         Binding="{Binding IsRequired}" 
-                        Header="Обязателен" 
+                        Header="Required" 
                         IsThreeState="False"
                         />
                 </DataGrid.Columns>

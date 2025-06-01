@@ -40,23 +40,23 @@ namespace TenderApp.Services
         {
             if(string.IsNullOrWhiteSpace(item.Name))
                 throw new ArgumentException
-                    ("Имя пользователя не указано");
+                    ("User name is not specified");
 
             if(string.IsNullOrWhiteSpace(item.Login))
                 throw new ArgumentException
-                    ("Логин пользователя не указано");
+                    ("User login is not specified");
 
             if(string.IsNullOrWhiteSpace(item.Password))
                 throw new ArgumentException
-                    ("Пароль пользователя не указан");
+                    ("User password is not specified");
 
             if(item.Role is null)
-                throw new ArgumentException("Роль пользователя не указана");
+                throw new ArgumentException("User role is not specified");
         }
 
         protected override string GetDeleteErrorMessage(User item)
-            => "Невозможно удалить пользователя: "
-            + "есть данные связанные с ним.";
+            => "Unable to delete user: "
+            + "there is data associated with them.";
     }
 }
 

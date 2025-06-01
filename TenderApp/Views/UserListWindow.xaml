@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Пользователи" 
+    Title="Users" 
     Width="800"
     WindowStartupLocation="CenterScreen"
     >
@@ -30,25 +30,24 @@
             <DataGrid x:Name="dataGrid"
                 Height="200"
                 ItemsSource="{Binding Items}"
-                SelectedItem=
-                      "{Binding SelectedItem, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                 >
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Binding="{Binding Name}"
-                        Header="Имя"
+                        Header="Name"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Login}"
-                        Header="Логин"
+                        Header="Login"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Password}"
-                        Header="Пароль"
+                        Header="Password"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding Role.Name}"
-                        Header="Роль"
+                        Header="Role"
                         />
                 </DataGrid.Columns>
             </DataGrid>

@@ -26,12 +26,12 @@ namespace TenderApp.Services
         {
             if(string.IsNullOrWhiteSpace(item.Name))
                 throw new ArgumentException
-                    ("Роль не указана");
+                    ("Role is not specified");
         }
 
         protected override string GetDeleteErrorMessage(Role item)
-            => "Невозможно удалить роль: "
-            + "есть данные связанные с ней.";
+            => "Unable to delete role: "
+            + "there is data associated with it.";
     }
 }
 

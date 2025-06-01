@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Пользователь" 
+    Title="User" 
     Width="600"
     WindowStartupLocation="CenterOwner"
     >
@@ -27,7 +27,7 @@
         <TextBlock 
             Grid.Row="0" 
             Grid.Column="0" 
-            Text="Имя:"
+            Text="Name:"
             />
         <TextBox
             Grid.Row="0" 
@@ -38,7 +38,7 @@
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="0" 
-            Text="Логин:"
+            Text="Login:"
             />
         <TextBox 
             Grid.Row="1" 
@@ -48,7 +48,7 @@
         <TextBlock 
             Grid.Row="2" 
             Grid.Column="0" 
-            Text="Пароль:"                    
+            Text="Password:"                    
             />
         <TextBox 
             Grid.Row="2" 
@@ -58,7 +58,7 @@
         <TextBlock 
             Grid.Row="3" 
             Grid.Column="0" 
-            Text="Роль:"                  
+            Text="Role:"                  
             />
         <ComboBox 
             Grid.Row="3" 

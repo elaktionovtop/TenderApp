@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Критерий тендаера" 
+    Title="Tender Criterion" 
     Width="600"
     WindowStartupLocation="CenterOwner"
     >
@@ -27,7 +27,7 @@
         <TextBlock 
             Grid.Row="0" 
             Grid.Column="0" 
-            Text="Критерий тендера:"                  
+            Text="Tender criterion:"                  
             />
         <ComboBox 
             Grid.Row="0" 
@@ -42,7 +42,7 @@
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="0" 
-            Text="Вес:"
+            Text="Weight:"
             />
         <TextBox 
             Grid.Row="1" 
@@ -52,7 +52,7 @@
         <TextBlock 
             Grid.Row="2" 
             Grid.Column="0" 
-            Text="Обязателен:"                    
+            Text="Required:"                    
             />
         <CheckBox
             Grid.Row="2"
@@ -64,4 +64,5 @@
             Grid.Row="3" 
             Grid.Column="1"                   
             />
-    </Grid></Window>
+    </Grid>
+</Window>

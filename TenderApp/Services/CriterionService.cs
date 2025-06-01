@@ -35,11 +35,11 @@ namespace TenderApp.Services
         {
             if(string.IsNullOrWhiteSpace(item.Name))
                 throw new ArgumentException
-                    ("Имя пользователя не указано");
+                    ("User name is not specified");
         }
 
         protected override string GetDeleteErrorMessage(Criterion item)
-            => "Невозможно удалить критерий: "
-            + "есть данные связанные с ним.";
+            => "Unable to delete criterion: "
+            + "there is data associated with it.";
     }
 }

@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Значения заявки" 
+    Title="Proposal Values" 
     Width="600"
     WindowStartupLocation="CenterOwner"
     >
@@ -27,7 +27,7 @@
         <TextBlock 
             Grid.Row="0" 
             Grid.Column="0" 
-            Text="Участник:"
+            Text="Participant:"
             />
         <ComboBox 
             Grid.Row="0" 
@@ -41,7 +41,7 @@
         <TextBlock 
             Grid.Row="1" 
             Grid.Column="0" 
-            Text="Комментарий:"                  
+            Text="Comment:"                  
             />
         <TextBox 
             Grid.Row="1" 
@@ -52,7 +52,7 @@
         <TextBlock 
             Grid.Row="2" 
             Grid.Column="0" 
-            Text="Победитель:"
+            Text="Winner:"
             />
         <CheckBox
             Grid.Row="2"
@@ -82,7 +82,7 @@
                          Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
 
                         <TextBlock Grid.Column="2"
-                           Text="Оценка"
+                           Text="Score"
                            Margin="0,0,10,0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"

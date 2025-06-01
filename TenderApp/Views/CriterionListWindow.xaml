@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:TenderApp.Views"
 
     Height="450" 
-    Title="Критерии" 
+    Title="Criteria" 
     Width="800"
     WindowStartupLocation="CenterScreen"
     >
@@ -30,22 +30,18 @@
             <DataGrid x:Name="dataGrid"
                 Height="200"
                 ItemsSource="{Binding Items}"
-                SelectedItem=
-                      "{Binding SelectedItem}"
-                >
+                SelectedItem="{Binding SelectedItem}">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Binding="{Binding Name}"
-                        Header="Название"
+                        Header="Name"
                         />
                     <DataGridTextColumn 
                         Binding="{Binding CriterionTypeText}"
-                        Header="Тип"
+                        Header="Type"
                         />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
     </StackPanel>
 </Window>
-
-<!--"{Binding SelectedItem, Mode=TwoWay}"-->

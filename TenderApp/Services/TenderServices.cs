@@ -48,27 +48,27 @@ namespace TenderApp.Services
         {
             if(string.IsNullOrWhiteSpace(item.Name))
                 throw new ArgumentException
-                    ("Наименование тендера не указано");
+                    ("Tender name is not specified");
 
             if(string.IsNullOrWhiteSpace(item.Product))
                 throw new ArgumentException
-                    ("Наименование продукта не указано");
+                    ("Product name is not specified");
 
             if(item.Budget <= 0)
-                throw new ArgumentException("Бюджен не указан");
+                throw new ArgumentException("Budget is not specified");
 
             if(item.Quantity <= 0)
-                throw new ArgumentException("Количество не указано");
+                throw new ArgumentException("Quantity is not specified");
 
             if(item.CreatedBy is null)
-                throw new ArgumentException("Менеджер не указан");
+                throw new ArgumentException("Category manager is not specified");
 
             if(item.Criteria is null)
-                throw new ArgumentException("Критерии не указаны");
+                throw new ArgumentException("Criteria are not specified");
         }
 
         protected override string GetDeleteErrorMessage(Tender item)
-            => "Невозможно удалить тендер: "
-            + "он содержит связанные заявки.";
+            => "Unable to delete tender: "
+            + "it contains related proposals.";
     }
 }
