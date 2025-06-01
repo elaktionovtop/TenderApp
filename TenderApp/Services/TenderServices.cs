@@ -46,6 +46,10 @@ namespace TenderApp.Services
 
         public override void Validate(Tender item)
         {
+            if(string.IsNullOrWhiteSpace(item.Name))
+                throw new ArgumentException
+                    ("Наименование тендера не указано");
+
             if(string.IsNullOrWhiteSpace(item.Product))
                 throw new ArgumentException
                     ("Наименование продукта не указано");

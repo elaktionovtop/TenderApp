@@ -51,7 +51,7 @@ namespace TenderApp.Services
         {
             if(item.Weight < 1 || item.Weight > 100)
                 throw new ArgumentException
-                    ("Вес должен быть в пределах 1 - 10");
+                    ("Вес должен быть в пределах 1 - 100");
         }
 
         protected override string GetDeleteErrorMessage(TenderCriterion item)

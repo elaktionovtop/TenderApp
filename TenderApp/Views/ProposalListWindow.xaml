@@ -20,6 +20,19 @@
 
     <StackPanel 
         Margin="10, 0">
+        <Menu>
+            <MenuItem
+                Command="{Binding CalculateWinnerCommand}"
+                Header="Определить победителя Ctrl+G"
+                InputGestureText="Ctrl+G"
+                />
+            <MenuItem
+                Command="{Binding CreateContractCommand}"
+                Header="Сформироввать контракт Ctrl+R"
+                InputGestureText="Ctrl+R"
+                />
+        </Menu>
+
         <view:ListWindowButtonPanel/>
 
         <Grid>

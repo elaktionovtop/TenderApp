@@ -18,19 +18,27 @@ namespace TenderApp.Services
                     .ThenInclude(tc => tc.Criterion))
             ;
 
-        //public IEnumerable<Proposal> GetByTenderIdByerId(int tenderId, int byerId)
-        //    => (_db.Proposals
-        //    .Where(p => p.TenderId == tenderId && p.ByerId = byerId)
-        //    .Include(p => p.Tender)
-        //    .Include(p => p.Byer)
-        //    .Include(p => p.Values)
-        //        .ThenInclude(v => v.TenderCriterion)
-        //            .ThenInclude(tc => tc.Criterion))
-        //    ;
-
         public IEnumerable<Proposal> GetByTenderIdBuyerId(int tenderId, int byerId)
             => GetByTenderId(tenderId).Where(p => p.ByerId == byerId);
 
+        public Proposal? CalculateBest(int tenderId)
+            => GetByTenderId(tenderId)
+                .MaxBy(p => p.Values.Sum(v =>
+                    (v.Score ?? 0) * (v.TenderCriterion?.Weight ?? 0)));
+
+        public Proposal? SelectWinner(int tenderId)
+        {
+            var proposals = GetByTenderId(tenderId);
+            var best = proposals.MaxBy(p => p.Values.Sum(v =>
+                    (v.Score ?? 0) * (v.TenderCriterion?.Weight ?? 0)));
+
+            foreach(var p in proposals)
+                p.IsWinner = (p == best);
+
+            _db.SaveChanges();
+
+            return best;
+        }
 
         public override Proposal Clone(Proposal source)
         {
@@ -77,7 +85,6 @@ namespace TenderApp.Services
                 if(proposal.Value is null)
                     throw new ArgumentException("Значения заявки не указаны");
             }
-            // нужно проверить каждое значение...
         }
 
         //protected override string GetDeleteErrorMessage

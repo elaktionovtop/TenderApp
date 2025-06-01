@@ -57,13 +57,21 @@ namespace TenderApp.Views
 
             foreach(var criterion in criteria)
             {
-                var column = new DataGridTextColumn
+                // Колонка значения
+                var valueColumn = new DataGridTextColumn
                 {
-                    Header = criterion.Name,
+                    Header = $"{criterion.Name}",
                     Binding = new Binding($"ValueMap[{criterion.Id}]")
                 };
+                grid?.Columns.Add(valueColumn);
 
-                grid?.Columns.Add(column);
+                // Колонка оценки
+                var scoreColumn = new DataGridTextColumn
+                {
+                    Header = $"(оценка)",
+                    Binding = new Binding($"ScoreMap[{criterion.Id}]")
+                };
+                grid?.Columns.Add(scoreColumn);
             }
         }
     }

@@ -22,5 +22,10 @@ namespace TenderApp.Models
         public Dictionary<int, string> ValueMap 
             => Values.ToDictionary(v => v.TenderCriterion.CriterionId,
                 v => v.Value);
+
+        [NotMapped]
+        public Dictionary<int, int?> ScoreMap =>
+            Values.ToDictionary(v => v.TenderCriterion.CriterionId,
+                                v => v.Score);
     }
 }

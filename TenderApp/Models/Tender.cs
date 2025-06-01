@@ -3,6 +3,7 @@
     public class Tender
     {
         public int Id { get; set; }
+        public string Name { get; set; } = null!;
         public string Product { get; set; } = null!;
         public decimal Budget { get; set; }
         public int Quantity { get; set; }

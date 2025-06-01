@@ -4,12 +4,10 @@
     {
         public int Id { get; set; }
 
-        public int TenderId { get; set; }
-        public Tender Tender { get; set; } = null!;
-
-        public int WinnerId { get; set; }
-        public User Winner { get; set; } = null!;
+        public int ProposalId { get; set; }
+        public Tender Proposal { get; set; } = null!;
 
         public string Details { get; set; } = null!;
+        public string FilePath { get; set; } = null!;
     }
 }

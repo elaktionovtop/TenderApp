@@ -117,14 +117,16 @@ namespace TenderApp.Data
                 _db.Tenders.AddRange
                 (
                     new Tender 
-                    { 
+                    {
+                        Name = "Тендер 1",
                         Product = "Кабель", 
                         Budget = 100000, 
                         Quantity = 100, 
                         CreatedById = creatorId
                     },
                     new Tender 
-                    { 
+                    {
+                        Name = "Тендер 2",
                         Product = "Щиты", 
                         Budget = 150000, 
                         Quantity = 50, 
@@ -231,16 +233,15 @@ namespace TenderApp.Data
         {
             if(!_db.Contracts.Any())
             {
-                var tender = _db.Tenders.First(t => t.Id == 1);
-                var winner = _db.Users.First(u => u.Name == "Байер 1");
+                var proposal = _db.Proposals.First(p => p.Id == 1);
 
                 _db.Contracts.Add
                 (
                     new Contract
                     {
-                        TenderId = tender.Id,
-                        WinnerId = winner.Id,
-                        Details = "Новый контракт"
+                        ProposalId = proposal.Id,
+                        Details = "Новый контракт",
+                        FilePath = "Контракт01.docx"
                     }
                 );
                 _db.SaveChanges();

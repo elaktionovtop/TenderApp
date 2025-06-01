@@ -79,19 +79,12 @@ namespace TenderApp.Data
                 .HasForeignKey(cv => cv.TenderCriterionId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Contract → Tender
+            // Contract → Proposal
             modelBuilder.Entity<Contract>()
-                .HasOne(c => c.Tender)
+                .HasOne(c => c.Proposal)
                 .WithMany()
-                .HasForeignKey(c => c.TenderId)
-                .OnDelete(DeleteBehavior.Cascade); // тендер удаляется — контракт тоже
-
-            // Contract → Winner (User)
-            modelBuilder.Entity<Contract>()
-                .HasOne(c => c.Winner)
-                .WithMany()
-                .HasForeignKey(c => c.WinnerId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(c => c.ProposalId)
+                .OnDelete(DeleteBehavior.Cascade); // заявка удаляется — контракт тоже
         }
 
         public class ContextFactory : IDesignTimeDbContextFactory<TenderDbContext>

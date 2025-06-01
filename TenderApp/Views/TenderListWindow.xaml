@@ -47,7 +47,8 @@
         Margin="10, 0">
         <Menu>
             <MenuItem
-                Header="Тендер">
+                Header="Тендер"
+                Visibility="{Binding ManagerVisibility}">
                 <MenuItem
                     Command="{Binding TenderCriteriaCommand}"
                     Header="Критерии"
@@ -64,16 +65,19 @@
                 Command="{Binding CriteriaCommand}"
                 Header="Список критериев"
                 InputGestureText="Ctrl+S"
+                Visibility="{Binding ManagerVisibility}"
                 />
             <MenuItem
                 Command="{Binding BuyerTenderProposalCommand}"
                 Header="Список заявок участника"
                 InputGestureText="Ctrl+E"
+                Visibility="{Binding BuyerVisibility}"
                 />
             <MenuItem
                 Command="{Binding UsersCommand}"
                 Header="Список пользоателей Ctrl+G"
                 InputGestureText="Ctrl+G"
+                Visibility="{Binding AdminVisibility}"
                 />
         </Menu>
         

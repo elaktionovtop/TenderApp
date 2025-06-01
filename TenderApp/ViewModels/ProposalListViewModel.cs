@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using CommunityToolkit.Mvvm.Input;
+
+using System.Diagnostics;
+using System.Windows;
 
 using TenderApp.Models;
 using TenderApp.Services;
@@ -13,16 +16,31 @@ namespace TenderApp.ViewModels
         public int TenderId { get; set; }
         public int BuyerId { get; set; }
 
-
-        public  override void GetData()
+        //  вычисление победителя по критериям
+        [RelayCommand]
+        private void CalculateWinner()
         {
-            if(BuyerId == 0)
+            Debug.WriteLine(nameof(CalculateWinner));
+            var winner = ((ProposalService)_service).SelectWinner(TenderId);
+            GetData(); // обновит Items и SelectedItem
+        }
+
+        //  создание контракта
+        [RelayCommand]
+        private void CreateContract()
+        {
+            Debug.WriteLine(nameof(CreateContract));
+        }
+
+        public override void GetData()
+        {
+            if(BuyerId == 0) // окно организатора
             {
                 Items = ((ProposalService)_service)
                 .GetByTenderId(TenderId)
                 .ToObservableCollection();
             }
-            else
+            else    // окно участника
             {
                 Items = ((ProposalService)_service)
                 .GetByTenderIdBuyerId(TenderId, BuyerId)

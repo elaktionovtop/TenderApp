@@ -1,4 +1,6 @@
-﻿using TenderApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
+
+using TenderApp.Data;
 using TenderApp.Models;
 
 namespace TenderApp.Services
@@ -17,7 +19,7 @@ namespace TenderApp.Services
 
         public bool IsLoginValid(string login, string password)
         {
-            CurrentUser = _db.Users?.FirstOrDefault(u =>
+            CurrentUser = _db.Users?.Include(u => u.Role)?.FirstOrDefault(u =>
                 u.Login == login && u.Password == password);
             return CurrentUser != null;
         }

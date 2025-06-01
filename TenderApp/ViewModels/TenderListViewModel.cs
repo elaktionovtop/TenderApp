@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,10 +13,40 @@ using TenderApp.Views;
 namespace TenderApp.ViewModels
 {
     public partial class TenderListViewModel
-        (IDbService<Tender> service) 
-        : ListViewModel<Tender>(service)
+        : ListViewModel<Tender>
     {
+        private User _currentUser;
 
+        [ObservableProperty]
+        Visibility _adminVisibility;
+
+        [ObservableProperty]
+        Visibility _buyerVisibility;
+
+        [ObservableProperty]
+        Visibility _managerVisibility;
+
+        public TenderListViewModel(IDbService<Tender> service)
+            : base(service)
+        {
+            _currentUser = App.Services
+                .GetRequiredService<IAuthService>()
+                .CurrentUser;
+
+            AdminVisibility =
+                _currentUser.Role.Code == RoleCode.Admin ?
+                Visibility.Visible : Visibility.Hidden;
+
+            BuyerVisibility =
+                _currentUser.Role.Code == RoleCode.Admin
+                || _currentUser.Role.Code == RoleCode.Buyer ?
+                Visibility.Visible : Visibility.Hidden;
+
+            ManagerVisibility =
+                _currentUser.Role.Code == RoleCode.Admin
+                || _currentUser.Role.Code == RoleCode.CategoryManager ?
+                Visibility.Visible : Visibility.Hidden;
+        }
         //  команды Организатора (Category Manager)
         //  ---------------------------------------
         //  добавить тендер (окно заголовка тендера)
@@ -66,15 +97,16 @@ namespace TenderApp.ViewModels
         private void BuyerTenderProposal()
         {
             Debug.WriteLine(nameof(BuyerTenderProposal));
-            int buyerId = App.Services
-                    .GetRequiredService<IAuthService>()
-                    .CurrentUser.Id; 
-            new ProposalListWindow(SelectedItem.Id, buyerId)
+            //int buyerId = App.Services
+            //        .GetRequiredService<IAuthService>()
+            //        .CurrentUser.Id; 
+            new ProposalListWindow(SelectedItem.Id, 
+                _currentUser.Id)
                 .ShowDialog();
         }
 
         //  ---------------------------------------
-        //  команды Администратора (Buyer)
+        //  команды Администратора (Admin)
         //  ---------------------------------------
         //  окно пользователей (CRUD)
         [RelayCommand]

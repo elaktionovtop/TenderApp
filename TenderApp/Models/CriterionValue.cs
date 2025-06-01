@@ -1,6 +1,5 @@
 ﻿namespace TenderApp.Models
 {
-    //public class ProposalValue
     public class CriterionValue
     {
         public int Id { get; set; }
