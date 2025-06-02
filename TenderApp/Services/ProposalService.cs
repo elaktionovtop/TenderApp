@@ -1,7 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using System.Diagnostics;
+using System.IO;
+
 using TenderApp.Data;
 using TenderApp.Models;
+
+using Xceed.Words.NET;
 
 namespace TenderApp.Services
 {
@@ -38,6 +43,37 @@ namespace TenderApp.Services
             _db.SaveChanges();
 
             return best;
+        }
+
+        public void CreateContracts(int tenderId)
+        {
+            var proposals = GetByTenderId(tenderId).Where(p => p.IsWinner);
+
+            foreach(var p in proposals)
+            {
+                CreateContract(p);
+            }
+        }
+
+        public void CreateContract(Proposal proposal)
+        {
+            Debug.WriteLine(proposal.Byer.Name);
+            var fileName = $"Contract_{proposal.Id}.docx";
+            var templatePath = @"..\..\..\Templates\ContractTemplate.docx";
+            var outputPath = Path.Combine(@"..\..\..\Contracts", fileName);
+
+            var doc = DocX.Load(templatePath);
+
+            doc.ReplaceText("{Date}", DateTime.Now.ToShortDateString());
+            doc.ReplaceText("{Buyer}", proposal?.Byer?.Name  ?? " *** ");
+            doc.ReplaceText("{Product}", proposal?.Tender?.Product ?? " *** ");
+            doc.ReplaceText("{TenderId}", proposal?.Tender?.Id.ToString());
+            doc.ReplaceText("{Quantity}", proposal?.Tender.Quantity.ToString() );
+            doc.ReplaceText("{TotalPrice}", proposal?.Tender.Budget.ToString() );
+            doc.ReplaceText("{UnitPrice}", " *** ");
+            doc.ReplaceText("{Manager}", proposal?.Tender.CreatedBy.Name ?? " *** " );
+
+            doc.SaveAs(outputPath);
         }
 
         public override Proposal Clone(Proposal source)

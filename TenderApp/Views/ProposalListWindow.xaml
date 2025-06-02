@@ -20,7 +20,9 @@
 
     <StackPanel 
         Margin="10, 0">
-        <Menu>
+        <Menu
+            Visibility="{Binding BuyerVisibility}"
+            >
             <MenuItem
                 Command="{Binding CalculateWinnerCommand}"
                 Header="Determine Winner"
